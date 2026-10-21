@@ -65,23 +65,6 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Install the preprocess plugin into mavenLocal
-        run: |
-          git clone --depth 1 -b edge https://github.com/Fallen-Breath/preprocessor.git ../preprocessor
-          cat >> ../preprocessor/build.gradle.kts <<'EOF'
-
-          repositories {
-              maven { url = uri("https://maven.fabricmc.net/") }
-          }
-          dependencies {
-              implementation("net.fabricmc:mapping-io:0.8.0")
-          }
-          EOF
-          sed -i 's/JavaLanguageVersion.of(8)/JavaLanguageVersion.of(17)/' ../preprocessor/build.gradle.kts
-          cd ../preprocessor
-          chmod +x gradlew
-          ./gradlew publishToMavenLocal --no-daemon
-
       - name: Preprocess resources
         env:
           BUILD_TYPE: "BETA"

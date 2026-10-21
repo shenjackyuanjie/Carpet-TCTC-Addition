@@ -25,6 +25,17 @@ pluginManagement {
         }
     }
 
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == "com.replaymod.preprocess") {
+                // The plugin is no longer published anywhere and Jitpack publishes no plugin
+                // marker, so redirect to the artifact built from the maintained fork. Pinned to
+                // the 2023-10 edge commit, which does not depend on mapping-io and therefore
+                // does not bump the mapping-io that fabric-loom 1.4 itself needs (0.4.2).
+                useModule("com.github.Fallen-Breath:preprocessor:${requested.version}")
+            }
+        }
+    }
 }
 
 def versions = Arrays.asList(
