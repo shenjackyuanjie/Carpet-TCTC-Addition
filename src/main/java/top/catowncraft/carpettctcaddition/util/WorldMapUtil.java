@@ -32,7 +32,10 @@ public class WorldMapUtil {
             bufs.writeByte(bytes.length);
             bufs.writeBytes(bytes);
             responseSender.sendPacket(VOXEL_MAP_CHANNEL, bufs);
-            bufs.release();
+            // Do not release the buffer here: PacketSender does not retain it and the packet is
+            // encoded asynchronously on the netty IO thread. Releasing it on the calling thread
+            // makes the encoder read a buffer with refCnt 0, which throws
+            // IllegalReferenceCountException and kicks the player (EncoderException).
         }
     }
 
@@ -46,7 +49,7 @@ public class WorldMapUtil {
             buf.writeInt((int) crc32.getValue());
             ServerPlayNetworking.send(player, XAERO_MINI_MAP_CHANNEL, buf);
             ServerPlayNetworking.send(player, XAERO_WORLD_MAP_CHANNEL, buf);
-            buf.release();
+            // Same here: the buffer must stay alive until the packet has been encoded.
         }
     }
 }
