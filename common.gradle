@@ -124,9 +124,9 @@ loom {
     runClient {
         defaultCharacterEncoding("UTF-8")
 
-        if (!new File("${projectDir}/run/client/options.txt").exists()) {
-            new File("${projectDir}/run/client").mkdirs()
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("${projectDir}/run/client/options.txt"))
+        if (!new File("${project.projectDir}/run/client/options.txt").exists()) {
+            new File("${project.projectDir}/run/client").mkdirs()
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("${project.projectDir}/run/client/options.txt"))
             bufferedWriter.writeLine("autoJump:false")
             bufferedWriter.writeLine("enableVsync:false")
             bufferedWriter.writeLine("forceUnicodeFont:true")
@@ -146,9 +146,9 @@ loom {
         defaultCharacterEncoding("UTF-8")
 
         // Agree eula before server init.
-        if (!new File("${projectDir}/run/server/eula.txt").exists()) {
-            new File("${projectDir}/run/server").mkdirs()
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("${projectDir}/run/server/eula.txt"))
+        if (!new File("${project.projectDir}/run/server/eula.txt").exists()) {
+            new File("${project.projectDir}/run/server").mkdirs()
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("${project.projectDir}/run/server/eula.txt"))
             bufferedWriter.writeLine("eula=true")
             bufferedWriter.close()
         }
