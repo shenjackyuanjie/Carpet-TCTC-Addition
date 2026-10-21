@@ -66,7 +66,16 @@ jobs:
         run: chmod +x gradlew
 
       - name: Clone preprocess plugin source
-        run: git clone --depth 1 -b edge https://github.com/Fallen-Breath/preprocessor.git ../preprocessor
+        run: |
+          git clone --depth 1 -b edge https://github.com/Fallen-Breath/preprocessor.git ../preprocessor
+          cat >> ../preprocessor/build.gradle.kts <<'EOF'
+          repositories {
+              maven { url = uri("https://maven.fabricmc.net/") }
+          }
+          dependencies {
+              implementation("net.fabricmc:mapping-io:0.6.1")
+          }
+          EOF
 
       - name: Preprocess resources
         env:
