@@ -65,6 +65,9 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Clone preprocess plugin source
+        run: git clone --depth 1 -b edge https://github.com/Fallen-Breath/preprocessor.git ../preprocessor
+
       - name: Preprocess resources
         env:
           BUILD_TYPE: "BETA"

@@ -34,6 +34,13 @@ pluginManagement {
             }
         }
     }
+
+    // CI checks out the plugin sources next to the repository; building it as a composite
+    // build keeps its dependencies (e.g. mapping-io) intact, which the Jitpack artifact lacks.
+    def preprocessorSource = file("../preprocessor")
+    if (preprocessorSource.exists()) {
+        includeBuild(preprocessorSource)
+    }
 }
 
 buildscript {
