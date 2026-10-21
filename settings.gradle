@@ -25,37 +25,6 @@ pluginManagement {
         }
     }
 
-    resolutionStrategy {
-        eachPlugin {
-            if (requested.id.id == "com.replaymod.preprocess") {
-                // com.replaymod.preprocess:SNAPSHOT is no longer published to any of the
-                // repositories above, so pull the plugin from the maintained fork via Jitpack.
-                useModule("com.github.Fallen-Breath:preprocessor:${requested.version}")
-            }
-        }
-    }
-
-    // CI checks out the plugin sources next to the repository; building it as a composite
-    // build keeps its dependencies (e.g. mapping-io) intact, which the Jitpack artifact lacks.
-    def preprocessorSource = file("../preprocessor")
-    if (preprocessorSource.exists()) {
-        includeBuild(preprocessorSource)
-    }
-}
-
-buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            name = "Fabric"
-            url = "https://maven.fabricmc.net/"
-        }
-    }
-    dependencies {
-        // The Jitpack build of com.replaymod.preprocess does not declare its dependencies,
-        // so provide mapping-io (used to read remap mappings) on the settings classpath.
-        classpath "net.fabricmc:mapping-io:0.6.1"
-    }
 }
 
 def versions = Arrays.asList(

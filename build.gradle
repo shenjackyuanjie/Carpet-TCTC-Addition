@@ -1,22 +1,8 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            name = "Fabric"
-            url = "https://maven.fabricmc.net/"
-        }
-    }
-    dependencies {
-        // The Jitpack build of the preprocess plugin does not declare its own dependencies.
-        classpath "net.fabricmc:mapping-io:0.6.1"
-    }
-}
-
 plugins {
     id("maven-publish")
     id("fabric-loom").version("1.4-SNAPSHOT").apply(false)
     id("org.ajoberstar.grgit").version("5.2.0")
-    id("com.replaymod.preprocess").version("edge-SNAPSHOT")
+    id("com.replaymod.preprocess").version("SNAPSHOT")
 }
 
 preprocess {
