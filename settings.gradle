@@ -1,18 +1,3 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            name = "Fabric"
-            url = "https://maven.fabricmc.net/"
-        }
-    }
-    dependencies {
-        // The Jitpack build of com.replaymod.preprocess does not declare its dependencies,
-        // so provide mapping-io (used to read remap mappings) on the settings classpath.
-        classpath "net.fabricmc:mapping-io:0.6.1"
-    }
-}
-
 pluginManagement {
     repositories {
         mavenLocal()
@@ -48,6 +33,21 @@ pluginManagement {
                 useModule("com.github.Fallen-Breath:preprocessor:${requested.version}")
             }
         }
+    }
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "Fabric"
+            url = "https://maven.fabricmc.net/"
+        }
+    }
+    dependencies {
+        // The Jitpack build of com.replaymod.preprocess does not declare its dependencies,
+        // so provide mapping-io (used to read remap mappings) on the settings classpath.
+        classpath "net.fabricmc:mapping-io:0.6.1"
     }
 }
 
