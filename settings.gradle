@@ -24,6 +24,16 @@ pluginManagement {
             url("https://server.bbkr.space/artifactory/libs-release")
         }
     }
+
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == "com.replaymod.preprocess") {
+                // com.replaymod.preprocess:SNAPSHOT is no longer published to any of the
+                // repositories above, so pull the plugin from its source repo via Jitpack.
+                useModule("com.github.ReplayMod:preprocessor:master-SNAPSHOT")
+            }
+        }
+    }
 }
 
 def versions = Arrays.asList(
